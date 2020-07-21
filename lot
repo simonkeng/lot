@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+import sys
+import argparse
+import datetime
+import pytz
+
+parser = argparse.ArgumentParser(
+    description="LOT - Local Office Times (right now!)")
+parser.add_argument(
+    '--timezone',
+    '--time-zone',
+    '--timezones',
+    '--tz',
+    dest='timezones',
+    action='store_true',
+    help='Show list of timezones')
+
+
+def time_of_locale(tz):
+    """
+    Return current time based on tz
+    in format 1:15 PM (13:15)
+    """
+    t = datetime.datetime.now(tz)
+    t = [t.strftime("%I:%M %p"), t.strftime("%H:%M")]
+    return ' ('.join(t) + ')'
+
+
+def main():
+    args = parser.parse_args()
+    if args.timezones:
+        print(' \n '.join(pytz.all_timezones))
+        sys.exit()
+    else:
+        print("\n~ Current Local Office Times ~"
+              "\n------------------------------\n"
+              f"San Diego ---> {time_of_locale(pytz.timezone('US/Pacific'))}"
+              "\n------------------------------\n"
+              f"New York ---> {time_of_locale(pytz.timezone('US/Eastern'))}"
+              "\n------------------------------\n"
+              f"Mannheim ---> {time_of_locale(pytz.timezone('Europe/Berlin'))}"
+              "\n------------------------------\n"
+              f"Bangalore ---> {time_of_locale(pytz.timezone('Asia/Kolkata'))}"
+              "\n------------------------------\n")
+
+
+if __name__ == "__main__":
+    main()
