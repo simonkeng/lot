@@ -4,16 +4,15 @@ import argparse
 import datetime
 import pytz
 
-parser = argparse.ArgumentParser(
-    description="LOT - Local Office Times (right now!)")
-parser.add_argument(
-    '--timezone',
-    '--time-zone',
-    '--timezones',
-    '--tz',
-    dest='timezones',
-    action='store_true',
-    help='Show list of timezones')
+parser = argparse.ArgumentParser(description="LOT - Local Office Times")
+parser.add_argument('--tz',
+                    '--timezone',
+                    '--time-zone',
+                    '--time-zones',
+                    '--timezones',
+                    dest='timezones',
+                    action='store_true',
+                    help='Show list of pytz timezones')
 
 
 def time_of_locale(tz):
@@ -40,7 +39,7 @@ def main():
               "\n------------------------------\n"
               f"Mannheim ---> {time_of_locale(pytz.timezone('Europe/Berlin'))}"
               "\n------------------------------\n"
-              f"Bangalore ---> {time_of_locale(pytz.timezone('Asia/Kolkata'))}"
+              f"Hyderabad ---> {time_of_locale(pytz.timezone('Asia/Kolkata'))}"
               "\n------------------------------\n")
 
 
